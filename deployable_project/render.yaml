@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: stock-trading-system
+    env: python
+    buildCommand: PIP_ONLY_BINARY=numpy,pandas pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: SUPABASE_URL
+        value: https://your_supabase_project.supabase.co
+      - key: SUPABASE_KEY
+        value: your_public_anon_key
+      - key: SECRET_KEY
+        value: dev-secret-key
+    healthCheckPath: /
+    autoDeploy: true
